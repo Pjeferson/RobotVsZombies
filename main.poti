@@ -5,8 +5,8 @@ var y_base := 375.0
 var x, y := 20.0, 375.0
 var exibir := esperaimg[1]
 ###
-background = Imagem("backgroundofc.png").fatie(960, 550)
-sobre = Imagem("backgroundx.png")
+background = Imagem("background.png").fatie(960, 550)
+sobre = Imagem("backgroundsobre.png")
 ###
 normalefeito()
   se y < y_base entao
