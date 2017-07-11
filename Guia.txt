@@ -1,0 +1,8 @@
+Para “fatiar” as partes do personagem, use como dimensões:
+Largura: 567 pixels x Altura: 556 pixels
+
+Para o “bullet.png”:
+Largura: 172 pixels x Altura: 139 pixels
+
+Para o “muzzle.png”:
+Largura: 19 pixels x Altura: 241 pixels

@@ -1,0 +1,90 @@
+use "jerimum"
+
+use "movimentos.poti"
+var y_base := 375.0
+var x, y := 20.0, 375.0
+var exibir := esperaimg[1]
+###
+background = Imagem("backgroundofc.png").fatie(960, 550)
+sobre = Imagem("backgroundx.png")
+###
+normalefeito()
+  se y < y_base entao
+    y := y + 5.0
+  fim
+fim
+
+espera()
+  n = (Relógio.milisegundos div 120) mod esperaimg.tamanho + 1
+  exibir := esperaimg[n]
+  normalefeito
+fim
+
+salto()
+  se y > y_base - 170 entao
+    y := y - 3.0
+    n = (Relógio.milisegundos div 120) mod saltoimg.tamanho + 1
+    exibir := saltoimg[n]
+  fim
+fim
+
+correr()
+  se x < jogo.largura entao
+    x := x + 4.0
+    n = (Relógio.milisegundos div 90) mod correrimg.tamanho + 1
+    exibir := correrimg[n]
+  fim
+  normalefeito
+fim
+
+recuar()
+  se x > 0 - 10 entao
+    x := x - 3.0
+    n = (Relógio.milisegundos div 240) mod correrimg.tamanho + 1
+    exibir := correrimg[n]
+  fim
+  normalefeito
+fim
+
+ataque_a()
+  n = (Relógio.milisegundos div 120) mod ataqueimg.tamanho + 1
+  exibir := ataqueimg[n]
+  normalefeito
+fim
+
+desenhe()
+  img = background[Relogio.milisegundos div 120 mod background.tamanho + 1]
+  img.desenhe(0, 0, 0)
+  sobre.desenhe(0, 0, 6)
+  exibir.desenhe(x, y, 1, 0, 0.25, 0.25)
+fim
+
+atualize()
+  #criar funcao para quando tiver pulando e movendos/ para quando estiver
+  #andando atulizar e puxar na velocidade "gravitacional" já
+  # estabelecidada antes em "normalefeito"
+  se Teclado.TECLA_PARA_CIMA entao
+    salto
+    se Teclado.TECLA_PARA_DIREITA então
+      se x < jogo.largura entao
+        x := x + 4.0
+      fim
+    fim
+    se Teclado.TECLA_PARA_ESQUERDA entao
+      se x > 0 - 10 entao
+        x := x - 3.0
+      fim
+    fim
+
+  senãose Teclado.TECLA_PARA_DIREITA então
+    correr
+  senãose Teclado.TECLA_PARA_ESQUERDA então
+    recuar
+  senãose Teclado.TECLA_ESPACO então
+    ataque_a
+  senão
+    espera
+  fim
+fim
+
+jogo.iniciar("Teste", 960, 550, atualize, desenhe)
