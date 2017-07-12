@@ -1,0 +1,127 @@
+use "jerimum"
+
+tipo Robot
+  var x, y, y_base: Real
+  var exibir := esperaimg[1]
+  var escala := 0.25
+  ######### Functions/Comands #########
+
+  normalefeito()
+    se y < y_base entao
+      y := y + 5.0
+    fim
+  fim
+
+  esperar()
+    n = (Relógio.milisegundos div 120) mod esperaimg.tamanho + 1
+    exibir := esperaimg[n]
+    normalefeito
+  fim
+
+  ##### /salto/ em construcao ####
+
+  salto()
+    ##pulo##
+    se y > y_base - (556 * escala) entao
+      y := y - 4.0
+      n = (Relógio.milisegundos div 120) mod saltoimg.tamanho + 1
+      exibir := saltoimg[n]
+    fim
+    #######
+    se Teclado.TECLA_ESPACO então
+      n = (Relógio.milisegundos div 120) mod ataquesaltoimg.tamanho + 1
+      exibir := ataquesaltoimg[n]
+    fim
+    se Teclado.TECLA_PARA_DIREITA então
+      se x < jogo.largura entao
+        x := x + 4.0
+      fim
+    fim
+    se Teclado.TECLA_PARA_ESQUERDA entao
+      se x > 0 - 10 entao
+        x := x - 3.0
+      fim
+    fim
+    se Teclado.TECLA_T então
+      n = (Relógio.milisegundos div 90) mod saltoatiraimg.tamanho + 1
+      exibir := saltoatiraimg[n]
+    fim
+  fim
+
+  correr()
+    se x + 567 * escala < jogo.largura entao
+      x := x + 4.0
+      n = (Relógio.milisegundos div 90) mod correrimg.tamanho + 1
+      exibir := correrimg[n]
+    fim
+    se Teclado.TECLA_T então
+      n = (Relógio.milisegundos div 90) mod correatiraimg.tamanho + 1
+      exibir := correatiraimg[n]
+    fim
+    normalefeito
+  fim
+
+  recuar()
+    se x > 0 - 10 entao
+      x := x - 3.0
+      n = (Relógio.milisegundos div 240) mod correrimg.tamanho + 1
+      exibir := correrimg[n]
+    fim
+    se Teclado.TECLA_T então
+      n = (Relógio.milisegundos div 90) mod correatiraimg.tamanho + 1
+      exibir := correatiraimg[n]
+    fim
+    normalefeito
+  fim
+
+  rasteira()
+    n = (Relógio.milisegundos div 90) mod rasteiraimg.tamanho + 1
+    exibir := rasteiraimg[n]
+    x := x + 3.0
+    normalefeito
+  fim
+
+  ataque_a()
+      n = (Relógio.milisegundos div 120) mod ataqueimg.tamanho + 1
+      exibir := ataqueimg[n]
+      normalefeito
+  fim
+
+  atirar()
+    n = (Relógio.milisegundos div 120) mod atiraimg.tamanho + 1
+    exibir := atiraimg[n]
+    normalefeito
+  fim
+
+  morrer()
+    n = (Relógio.milisegundos div 90) mod morrerimg.tamanho + 1
+    exibir := morrerimg[n]
+    normalefeito
+  fim
+
+  desenhe()
+    exibir.desenhe(x, y, 1, 0, escala, escala)
+  fim
+
+  ######### Keys for play #########
+
+  atualize()
+    se Teclado.TECLA_PARA_CIMA entao
+      salto
+    senãose Teclado.TECLA_PARA_DIREITA então
+      correr
+    senãose Teclado.TECLA_PARA_ESQUERDA então
+      recuar
+    senãose Teclado.TECLA_ESPACO então
+      ataque_a
+    senãose Teclado.TECLA_T então
+      atirar
+    senãose Teclado.TECLA_PARA_BAIXO então
+      rasteira
+    senãose Teclado.TECLA_Y então
+      morrer
+    senão
+      esperar
+    fim
+  fim
+fim
