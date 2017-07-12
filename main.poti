@@ -17,7 +17,7 @@ fim
 espera()
   n = (Relógio.milisegundos div 120) mod esperaimg.tamanho + 1
   exibir := esperaimg[n]
-  normalefeito
+  normalefeito 
 fim
 
 salto()
