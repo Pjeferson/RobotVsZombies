@@ -6,6 +6,7 @@ use "robot.poti"
 var y_base := 375.0
 var x_robot, y_robot := 20.0, 375.0
 robot = Robot(x_robot, y_robot, y_base)
+
 ###
 background = Imagem("background.png").fatie(960, 550)
 sobre = Imagem("backgroundsobre.png")
@@ -23,4 +24,4 @@ atualize()
   robot.atualize
 fim
 
-jogo.iniciar("Teste", 960, 550, atualize, desenhe)
+jogo.iniciar("Teste", 960, 550, atualize, desenhe, 60)

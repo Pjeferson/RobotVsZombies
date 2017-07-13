@@ -1,0 +1,27 @@
+use "jerimum"
+
+tipo Powers
+  var x, y: Real
+  var exibirtiro := tiroimg[1]
+
+  tiro()
+    n = (Relógio.milisegundos div 120) mod tiroimg.tamanho + 1
+    exibirtiro := tiroimg[n]
+  fim
+
+
+
+
+  desenhe()
+    se Teclado.TECLA_T então
+      exibirtiro.desenhe(x, y, 1)
+    fim
+  fim
+
+  atualize()
+    se Teclado.TECLA_T entao
+      tiro
+    fim
+  fim
+
+fim

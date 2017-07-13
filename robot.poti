@@ -8,7 +8,7 @@ tipo Robot
 
   normalefeito()
     se y < y_base entao
-      y := y + 5.0
+      y := y + 7.0
     fim
   fim
 
@@ -87,11 +87,6 @@ tipo Robot
       normalefeito
   fim
 
-  atirar()
-    n = (Relógio.milisegundos div 120) mod atiraimg.tamanho + 1
-    exibir := atiraimg[n]
-    normalefeito
-  fim
 
   morrer()
     n = (Relógio.milisegundos div 90) mod morrerimg.tamanho + 1
@@ -99,10 +94,36 @@ tipo Robot
     normalefeito
   fim
 
-  desenhe()
-    exibir.desenhe(x, y, 1, 0, escala, escala)
+  var exibirtiro := tiroimg[1]
+  var x_tiro := x + 100
+  var y_tiro := y + 50
+
+    #### failllll ####
+  efeitotiro()
+    enquanto soma < 700.0 faça
+      ####
+    fim
   fim
 
+  tiro()
+    n = (Relógio.milisegundos div 120) mod tiroimg.tamanho + 1
+    exibirtiro := tiroimg[n]
+    efeitotiro
+  fim
+
+  atirar()
+    n = (Relógio.milisegundos div 120) mod atiraimg.tamanho + 1
+    exibir := atiraimg[n]
+    tiro
+    normalefeito
+  fim
+
+  desenhe()
+    exibir.desenhe(x, y, 1, 0, escala, escala)
+    se Teclado.TECLA_T então
+      exibirtiro.desenhe(x_tiro, y_tiro, 1, 0.0, escala, escala)
+    fim
+  fim
   ######### Keys for play #########
 
   atualize()
