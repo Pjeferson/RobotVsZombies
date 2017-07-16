@@ -1,9 +1,8 @@
 use "jerimum"
 
 tipo Robot
-  var x, y, y_base: Real
+  var x, y, y_base, escala: Real
   var exibir := esperaimg[1]
-  var escala := 0.25
   ######### Functions/Comands #########
 
   normalefeito()
@@ -21,19 +20,17 @@ tipo Robot
   ##### /salto/ em construcao ####
 
   salto()
-    ##pulo##
     se y > y_base - (556 * escala) entao
-      y := y - 4.0
+      y := y - 5.0
       n = (Relógio.milisegundos div 120) mod saltoimg.tamanho + 1
       exibir := saltoimg[n]
     fim
-    #######
     se Teclado.TECLA_ESPACO então
       n = (Relógio.milisegundos div 120) mod ataquesaltoimg.tamanho + 1
       exibir := ataquesaltoimg[n]
     fim
     se Teclado.TECLA_PARA_DIREITA então
-      se x < jogo.largura entao
+      se x + 567 * escala < jogo.largura entao
         x := x + 4.0
       fim
     fim
@@ -77,7 +74,9 @@ tipo Robot
   rasteira()
     n = (Relógio.milisegundos div 90) mod rasteiraimg.tamanho + 1
     exibir := rasteiraimg[n]
-    x := x + 3.0
+    se x + 567 * escala < jogo.largura entao
+      x := x + 3.0
+    fim
     normalefeito
   fim
 
@@ -98,17 +97,12 @@ tipo Robot
   var x_tiro := x + 100
   var y_tiro := y + 50
 
-    #### failllll ####
-  efeitotiro()
-    enquanto soma < 700.0 faça
-      ####
-    fim
-  fim
+
 
   tiro()
     n = (Relógio.milisegundos div 120) mod tiroimg.tamanho + 1
     exibirtiro := tiroimg[n]
-    efeitotiro
+
   fim
 
   atirar()
@@ -144,5 +138,6 @@ tipo Robot
     senão
       esperar
     fim
+
   fim
 fim

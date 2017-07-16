@@ -1,0 +1,67 @@
+use "jerimum"
+
+tipo Zombie
+  var x, y, y_base, escala: Real
+  var exibirzombie := esperazombie[1]
+  var pontos := 0
+  var dano := 10
+  var vida := "vivo"
+  ######### Functions/Comands #########
+
+  esperar()
+    n = (Relógio.milisegundos div 120) mod esperazombie.tamanho + 1
+    exibirzombie := esperazombie[n]
+  fim
+
+  desenhe()
+    exibirzombie.desenhe(x, y, 1, 0, escala, escala)
+  fim
+
+  andar()
+      n = (Relógio.milisegundos div 120) mod andazombie.tamanho + 1
+      exibirzombie := andazombie[n]
+      x := x - aleatorio([0.0, 0.3, 0.5, 0.6, 0.7, 1, 1,2])
+  fim
+
+  ataque()
+      n = (Relógio.milisegundos div 120) mod ataquezombie.tamanho + 1
+      exibirzombie := ataquezombie[n]
+      se n == 8 entao
+        pontos := pontos + 1
+      fim
+  fim
+
+  retorno_zombie()
+    se pontos < 20 entao
+      dano := 10
+    senãose pontos < 20 * 2 então
+      dano := 9
+    senãose pontos < 20 * 3 então
+      dano := 8
+    senãose pontos < 20 * 4 então
+      dano := 7
+    senãose pontos < 20 * 5 então
+      dano := 6
+    senãose pontos < 20 * 6 então
+      dano := 5
+    senãose pontos < 20 * 7 então
+      dano := 4
+    senãose pontos < 20 * 8 então
+      dano := 3
+    senãose pontos < 20 * 9 então
+      dano := 2
+    senãose pontos < 20 * 10 então
+      dano := 1
+    senao
+      vida := "morto"
+    fim
+    dano
+  fim
+
+  retorno_vida()
+    vida
+  fim
+  atualize()
+
+  fim
+fim

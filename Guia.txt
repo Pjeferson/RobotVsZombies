@@ -1,8 +1,17 @@
-Para ìfatiarî as partes do personagem, use como dimensıes:
-Largura: 567 pixels x Altura: 556 pixels
+Para "fatiar" as partes do personagem, use como dimens√µes:
+  Largura: 567 pixels x Altura: 556 pixels
 
-Para o ìbullet.pngî:
-Largura: 172 pixels x Altura: 139 pixels
+Para o "bullet.png":
+  Largura: 172 pixels x Altura: 139 pixels
 
-Para o ìmuzzle.pngî:
-Largura: 19 pixels x Altura: 241 pixels
+  Para o "muzzle.png":
+  Largura: 19 pixels x Altura: 241 pixels
+
+Para "fatiar" as partes do Zumbi, use como dimens√µes:
+  Largura: 430 pixels x Altura: 519 pixels
+
+  Para "dead.png":
+  Largura: 629 pixels x Altura: 526 pixels
+
+Para lifebar:
+  Largura: 424 pixels x Altura: 104 pixels

@@ -2,26 +2,80 @@ use "jerimum"
 
 use "movimentos.poti"
 use "robot.poti"
+use "zombie.poti"
 
-var y_base := 375.0
-var x_robot, y_robot := 20.0, 375.0
-robot = Robot(x_robot, y_robot, y_base)
+var y_base := 514.0 - 134.0
+var y_basezombie := 514.0 - 130.0
+var x_robot, y_robot, escala := 20.0, y_base, 0.25
+var x_zombie, y_zombie := 960.0 - 107 - 20, y_basezombie
+robot = Robot(x_robot, y_robot, y_base, escala)
+zombie = Zombie(x_zombie, y_zombie, y_basezombie, escala)
 
 ###
 background = Imagem("background.png").fatie(960, 550)
 sobre = Imagem("backgroundsobre.png")
+telainico = Imagem("startbackground.png").fatie(960, 550)
+var estado := "INICIO"
+lifebar = Imagem("lifebar.png").fatie(424, 104)
 ###
-
+var fonte := Fonte(16)
 
 desenhe()
+  escolha estado
+    caso "INICIO"  => desenhe_inicio
+    caso "JOGANDO" => desenhe_jogando
+    caso _         => desenhe_fim
+  fim
+fim
+
+atualize()
+  escolha estado
+    caso "INICIO"  => atualize_inicio
+    caso "JOGANDO" => atualize_jogando
+    caso _         => atualize_fim
+  fim
+fim
+
+
+# Estado: inicio do jogo
+atualize_inicio()
+  se Teclado.TECLA_ESPACO então estado := "JOGANDO" fim
+fim
+
+desenhe_inicio()
+  inicio = telainico[Relogio.milisegundos div 120 mod telainico.tamanho + 1]
+  inicio.desenhe(0, 0, 0)
+fim
+
+desenhe_jogando()
+  lifebar[zombie.retorno_zombie].desenhe(0, 0, 3)
   img = background[Relogio.milisegundos div 120 mod background.tamanho + 1]
   img.desenhe(0, 0, 0)
   sobre.desenhe(0, 0, 6)
   robot.desenhe
+  zombie.desenhe
 fim
 
-atualize()
+atualize_jogando()
+  se zombie.x > robot.x e zombie.x < robot.x + 70 então
+    zombie.ataque
+  senaose zombie.x > robot.x entao
+    zombie.andar
+  senaose zombie.x < robot.x - 100 entao
+    zombie.andar
+  senao
+    zombie.esperar
+  fim
   robot.atualize
+  zombie.atualize
+fim
+
+desenhe_fim()
+
+fim
+
+atualize_fim()
+  se Teclado.TECLA_ESPACO então estado := "JOGANDO" fim
 fim
 
 jogo.iniciar("Teste", 960, 550, atualize, desenhe, 60)
