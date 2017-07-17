@@ -57,7 +57,7 @@ desenhe_jogando()
 fim
 
 atualize_jogando()
-  se zombie.x > robot.x e zombie.x < robot.x + 70 então
+  se zombie.x > robot.x e zombie.x < robot.x + 70 e robot.y >= y_base -1 então
     zombie.ataque
   senaose zombie.x > robot.x entao
     zombie.andar
