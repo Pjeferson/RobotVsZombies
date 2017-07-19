@@ -11,6 +11,7 @@ saltoatiraimg = Imagem("robot/jumpshoot.png").fatie(567, 556)
 rasteiraimg = Imagem("robot/slide.png").fatie(567, 556)
 morrerimg = Imagem("robot/dead.png").fatie(567, 556)
 tiroimg = Imagem("powers/bullet.png").fatie(172, 139)
+efeito_ataqueimg = Imagem("powers/muzzle.png").fatie(19,241)
 
 ataquezombie = Imagem("zombie/attack.png").fatie(430, 519)
 morrerzombie = Imagem("zombie/dead.png").fatie(629, 526)

@@ -57,7 +57,7 @@ desenhe_jogando()
 fim
 
 atualize_jogando()
-  se zombie.x > robot.x e zombie.x < robot.x + 70 e robot.y >= y_base -1 então
+  se zombie.x > robot.x e zombie.x < robot.x + 70 então
     zombie.ataque
   senaose zombie.x > robot.x entao
     zombie.andar
@@ -68,10 +68,16 @@ atualize_jogando()
   fim
   robot.atualize
   zombie.atualize
+
+  se zombie.retorno_vida == "morto" então
+    robot.morrer
+    estado := "morto"
+  fim
 fim
 
 desenhe_fim()
-
+  inicio = telainico[Relogio.milisegundos div 120 mod telainico.tamanho + 1]
+  inicio.desenhe(0, 0, 0)
 fim
 
 atualize_fim()

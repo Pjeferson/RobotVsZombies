@@ -1,8 +1,10 @@
 use "jerimum"
 
+
 tipo Robot
   var x, y, y_base, escala: Real
   var exibir := esperaimg[1]
+  var efeito := efeito_ataqueimg[1]
   ######### Functions/Comands #########
 
   normalefeito()
@@ -81,7 +83,7 @@ tipo Robot
   fim
 
   ataque_a()
-      n = (Relógio.milisegundos div 120) mod ataqueimg.tamanho + 1
+      n = (Relógio.milisegundos div 80) mod ataqueimg.tamanho + 1
       exibir := ataqueimg[n]
       normalefeito
   fim
@@ -98,11 +100,15 @@ tipo Robot
   var y_tiro := y + 50
 
 
+#efeito ataque aqui
+  efeito_ataque()
+    n2 = (Relógio.milisegundos div 60) mod efeito_ataqueimg.tamanho + 1
+    efeito := efeito_ataqueimg[n2]
+  fim
 
   tiro()
     n = (Relógio.milisegundos div 120) mod tiroimg.tamanho + 1
     exibirtiro := tiroimg[n]
-
   fim
 
   atirar()
@@ -115,7 +121,11 @@ tipo Robot
   desenhe()
     exibir.desenhe(x, y, 1, 0, escala, escala)
     se Teclado.TECLA_T então
-      exibirtiro.desenhe(x_tiro, y_tiro, 1, 0.0, escala, escala)
+      #tinha esquecido de atualizar a variavel x_tiro e y_tiro, por isso que troquei
+      exibirtiro.desenhe(x+100, y+40, 1, 5.0, escala, escala)
+    fim
+    se Teclado.TECLA_ESPACO então
+      efeito.desenhe(x+100,y-20,1,0.0,1,1)
     fim
   fim
   ######### Keys for play #########
@@ -129,6 +139,7 @@ tipo Robot
       recuar
     senãose Teclado.TECLA_ESPACO então
       ataque_a
+      efeito_ataque
     senãose Teclado.TECLA_T então
       atirar
     senãose Teclado.TECLA_PARA_BAIXO então
