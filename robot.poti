@@ -122,10 +122,10 @@ tipo Robot
     exibir.desenhe(x, y, 1, 0, escala, escala)
     se Teclado.TECLA_T então
       #tinha esquecido de atualizar a variavel x_tiro e y_tiro, por isso que troquei
-      exibirtiro.desenhe(x+100, y+40, 1, 5.0, escala, escala)
+      exibirtiro.desenhe(x + 100, y + 40, 1, 5.0, escala, escala)
     fim
     se Teclado.TECLA_ESPACO então
-      efeito.desenhe(x+100,y-20,1,0.0,1,1)
+      efeito.desenhe(x + 100, y - 20, 1, 0.0, 1,1)
     fim
   fim
   ######### Keys for play #########

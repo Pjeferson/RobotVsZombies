@@ -14,7 +14,7 @@ zombie = Zombie(x_zombie, y_zombie, y_basezombie, escala)
 ###
 background = Imagem("background.png").fatie(960, 550)
 sobre = Imagem("backgroundsobre.png")
-telainico = Imagem("startbackground.png").fatie(960, 550)
+telainicio = Imagem("startbackground.png").fatie(960, 550)
 var estado := "INICIO"
 lifebar = Imagem("lifebar.png").fatie(424, 104)
 ###
@@ -43,7 +43,7 @@ atualize_inicio()
 fim
 
 desenhe_inicio()
-  inicio = telainico[Relogio.milisegundos div 120 mod telainico.tamanho + 1]
+  inicio = telainicio[Relogio.milisegundos div 120 mod telainicio.tamanho + 1]
   inicio.desenhe(0, 0, 0)
 fim
 
@@ -76,7 +76,7 @@ atualize_jogando()
 fim
 
 desenhe_fim()
-  inicio = telainico[Relogio.milisegundos div 120 mod telainico.tamanho + 1]
+  inicio = telainicio[Relogio.milisegundos div 120 mod telainicio.tamanho + 1]
   inicio.desenhe(0, 0, 0)
 fim
 
