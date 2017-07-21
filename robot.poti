@@ -14,7 +14,7 @@ tipo Robot
   fim
 
   esperar()
-    n = ((Relogio.milisegundos * testime) div 120) mod esperaimg.tamanho + 1
+    n = (Relogio.agora div 120 mod esperaimg.tamanho + 1).inteiro
     exibir := esperaimg[n]
     normalefeito
   fim
@@ -24,11 +24,11 @@ tipo Robot
   salto()
     se y > y_base - (556 * escala) entao
       y := y - 5.0
-      n = ((Relogio.milisegundos * testime) div 120) mod saltoimg.tamanho + 1
+      n = (Relogio.agora div 120 mod saltoimg.tamanho + 1).inteiro
       exibir := saltoimg[n]
     fim
     se Teclado.TECLA_ESPACO então
-      n = ((Relogio.milisegundos * testime) div 120) mod ataquesaltoimg.tamanho + 1
+      n = (Relogio.agora div 120 mod ataquesaltoimg.tamanho + 1).inteiro
       exibir := ataquesaltoimg[n]
     fim
     se Teclado.TECLA_PARA_DIREITA então
@@ -42,7 +42,7 @@ tipo Robot
       fim
     fim
     se Teclado.TECLA_T então
-      n = ((Relogio.milisegundos * testime) div 90) mod saltoatiraimg.tamanho + 1
+      n = (Relogio.agora div 90 mod saltoatiraimg.tamanho + 1).inteiro
       exibir := saltoatiraimg[n]
     fim
   fim
@@ -50,11 +50,11 @@ tipo Robot
   correr()
     se x + 567 * escala < jogo.largura entao
       x := x + 4.0
-      n = ((Relogio.milisegundos * testime) div 90) mod correrimg.tamanho + 1
+      n = (Relogio.agora div 90 mod correrimg.tamanho + 1).inteiro
       exibir := correrimg[n]
     fim
     se Teclado.TECLA_T então
-      n = ((Relogio.milisegundos * testime) div 90) mod correatiraimg.tamanho + 1
+      n = (Relogio.agora div 90 mod correatiraimg.tamanho + 1).inteiro
       exibir := correatiraimg[n]
     fim
     normalefeito
@@ -63,18 +63,18 @@ tipo Robot
   recuar()
     se x > 0 - 10 entao
       x := x - 3.0
-      n = ((Relogio.milisegundos * testime) div 240) mod correrimg.tamanho + 1
+      n = (Relogio.agora div 240 mod correrimg.tamanho + 1).inteiro
       exibir := correrimg[n]
     fim
     se Teclado.TECLA_T então
-      n = ((Relogio.milisegundos * testime) div 90) mod correatiraimg.tamanho + 1
+      n = (Relogio.agora div 90 mod correatiraimg.tamanho + 1).inteiro
       exibir := correatiraimg[n]
     fim
     normalefeito
   fim
 
   rasteira()
-    n = ((Relogio.milisegundos * testime) div 90) mod rasteiraimg.tamanho + 1
+    n = (Relogio.agora div 90 mod rasteiraimg.tamanho + 1).inteiro
     exibir := rasteiraimg[n]
     se x + 567 * escala < jogo.largura entao
       x := x + 3.0
@@ -83,14 +83,14 @@ tipo Robot
   fim
 
   ataque_a()
-      n = ((Relogio.milisegundos * testime) div 80) mod ataqueimg.tamanho + 1
+      n = (Relogio.agora div 80 mod ataqueimg.tamanho + 1).inteiro
       exibir := ataqueimg[n]
       normalefeito
   fim
 
 
   morrer()
-    n = ((Relogio.milisegundos * testime) div 90) mod morrerimg.tamanho + 1
+    n = (Relogio.agora div 90 mod morrerimg.tamanho + 1).inteiro
     exibir := morrerimg[n]
     normalefeito
   fim
@@ -102,17 +102,17 @@ tipo Robot
 
 #efeito ataque aqui
   efeito_ataque()
-    n2 = ((Relogio.milisegundos * testime) div 60) mod efeito_ataqueimg.tamanho + 1
+    n2 = (Relogio.agora div 60 mod efeito_ataqueimg.tamanho + 1).inteiro
     efeito := efeito_ataqueimg[n2]
   fim
 
   tiro()
-    n = ((Relogio.milisegundos * testime) div 120) mod tiroimg.tamanho + 1
+    n = (Relogio.agora div 120 mod tiroimg.tamanho + 1).inteiro
     exibirtiro := tiroimg[n]
   fim
 
   atirar()
-    n = ((Relogio.milisegundos * testime) div 120) mod atiraimg.tamanho + 1
+    n = (Relogio.agora div 120 mod atiraimg.tamanho + 1).inteiro
     exibir := atiraimg[n]
     tiro
     normalefeito

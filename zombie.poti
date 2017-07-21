@@ -9,7 +9,7 @@ tipo Zombie
   ######### Functions/Comands #########
 
   esperar()
-    n = ((Relogio.milisegundos * testime) div 120) mod esperazombie.tamanho + 1
+    n = (Relogio.agora div 120 mod esperazombie.tamanho + 1).inteiro
     exibirzombie := esperazombie[n]
   fim
 
@@ -18,13 +18,13 @@ tipo Zombie
   fim
 
   andar()
-      n = ((Relogio.milisegundos * testime) div 120) mod andazombie.tamanho + 1
+      n = (Relogio.agora div 120 mod andazombie.tamanho + 1).inteiro
       exibirzombie := andazombie[n]
       x := x - aleatorio([0.0, 0.3, 0.5, 0.6, 0.7, 1, 1,2])
   fim
 
   ataque()
-      n = ((Relogio.milisegundos * testime) div 120) mod ataquezombie.tamanho + 1
+      n = (Relogio.agora div 120 mod ataquezombie.tamanho + 1).inteiro
       exibirzombie := ataquezombie[n]
       se n == 8 entao
         pontos := pontos + 1

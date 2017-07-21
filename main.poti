@@ -1,12 +1,5 @@
 use "jerimum"
 
-#####previnindo erros do "Relogio"######
-var testeRelogio := 1
-se Relogio.milisegundos < 0 então
-  testeRelogio := -1
-fim
-testime = testeRelogio
-###### ### ### ######
 use "movimentos.poti"
 use "robot.poti"
 use "zombie.poti"
@@ -50,13 +43,13 @@ atualize_inicio()
 fim
 
 desenhe_inicio()
-  inicio = telainicio[(Relogio.milisegundos * testime) div 120 mod telainicio.tamanho + 1]
+  inicio = telainicio[(Relogio.agora div 120 mod telainicio.tamanho + 1).inteiro]
   inicio.desenhe(0, 0, 0)
 fim
 
 desenhe_jogando()
   lifebar[zombie.retorno_zombie].desenhe(0, 0, 3)
-  img = background[(Relogio.milisegundos * testime) div 120 mod background.tamanho + 1]
+  img = background[(Relogio.agora div 120 mod background.tamanho + 1).inteiro]
   img.desenhe(0, 0, 0)
   sobre.desenhe(0, 0, 6)
   robot.desenhe
@@ -83,7 +76,7 @@ atualize_jogando()
 fim
 
 desenhe_fim()
-  inicio = telainicio[(Relogio.milisegundos * testime) div 120 mod telainicio.tamanho + 1]
+  inicio = telainicio[(Relogio.agora div 120 mod telainicio.tamanho + 1).inteiro]
   inicio.desenhe(0, 0, 0)
 fim
 
