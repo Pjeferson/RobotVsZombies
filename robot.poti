@@ -2,9 +2,13 @@ use "jerimum"
 
 
 tipo Robot
-  var x, y, y_base, escala: Real
+  var x, y, escala: Real
   var exibir := esperaimg[1]
   var efeito := efeito_ataqueimg[1]
+  var z_x := 960.0
+  var z_pontos := 0
+  var z_dano := 10
+  var z_vida := "vivo"
   ######### Functions/Comands #########
 
   normalefeito()
@@ -86,6 +90,9 @@ tipo Robot
       n = (Relogio.agora div 80 mod ataqueimg.tamanho + 1).inteiro
       exibir := ataqueimg[n]
       normalefeito
+      se n == 4 e x + 90 > z_x e x + 5 < z_x entao
+        z_pontos := z_pontos + 1
+      fim
   fim
 
 
@@ -116,6 +123,37 @@ tipo Robot
     exibir := atiraimg[n]
     tiro
     normalefeito
+  fim
+
+  retorno_robot()
+    se z_pontos < 10 entao
+      z_dano := 10
+    senãose z_pontos < 10 * 2 então
+      z_dano := 9
+    senãose z_pontos < 10 * 3 então
+      z_dano := 8
+    senãose z_pontos < 10 * 4 então
+      z_dano := 7
+    senãose z_pontos < 10 * 5 então
+      z_dano := 6
+    senãose z_pontos < 10 * 6 então
+      z_dano := 5
+    senãose z_pontos < 10 * 7 então
+      z_dano := 4
+    senãose z_pontos < 10 * 8 então
+      z_dano := 3
+    senãose z_pontos < 10 * 9 então
+      z_dano := 2
+    senãose z_pontos < 10 * 10 então
+      z_dano := 1
+    senao
+      z_vida := "morto"
+    fim
+    z_dano
+  fim
+
+  retorno_vida()
+    z_vida
   fim
 
   desenhe()

@@ -1,11 +1,11 @@
 use "jerimum"
 
 tipo Zombie
-  var x, y, y_base, escala: Real
+  var x, y, escala: Real
   var exibirzombie := esperazombie[1]
-  var pontos := 0
-  var dano := 10
-  var vida := "vivo"
+  var r_pontos := 0
+  var r_dano := 10
+  var r_vida := "vivo"
   ######### Functions/Comands #########
 
   esperar()
@@ -23,43 +23,47 @@ tipo Zombie
       x := x - aleatorio([0.0, 0.3, 0.5, 0.6, 0.7, 1, 1,2])
   fim
 
+  morrer()
+    n = (Relogio.agora div 120 mod morrerzombie.tamanho + 1).inteiro
+    exibirzombie := morrerzombie[n]
+  fim
   ataque()
       n = (Relogio.agora div 120 mod ataquezombie.tamanho + 1).inteiro
       exibirzombie := ataquezombie[n]
       se n == 8 entao
-        pontos := pontos + 1
+        r_pontos := r_pontos + 1
       fim
   fim
 
   retorno_zombie()
-    se pontos < 20 entao
-      dano := 10
-    senãose pontos < 20 * 2 então
-      dano := 9
-    senãose pontos < 20 * 3 então
-      dano := 8
-    senãose pontos < 20 * 4 então
-      dano := 7
-    senãose pontos < 20 * 5 então
-      dano := 6
-    senãose pontos < 20 * 6 então
-      dano := 5
-    senãose pontos < 20 * 7 então
-      dano := 4
-    senãose pontos < 20 * 8 então
-      dano := 3
-    senãose pontos < 20 * 9 então
-      dano := 2
-    senãose pontos < 20 * 10 então
-      dano := 1
+    se r_pontos < 20 entao
+      r_dano := 10
+    senãose r_pontos < 20 * 2 então
+      r_dano := 9
+    senãose r_pontos < 20 * 3 então
+      r_dano := 8
+    senãose r_pontos < 20 * 4 então
+      r_dano := 7
+    senãose r_pontos < 20 * 5 então
+      r_dano := 6
+    senãose r_pontos < 20 * 6 então
+      r_dano := 5
+    senãose r_pontos < 20 * 7 então
+      r_dano := 4
+    senãose r_pontos < 20 * 8 então
+      r_dano := 3
+    senãose r_pontos < 20 * 9 então
+      r_dano := 2
+    senãose r_pontos < 20 * 10 então
+      r_dano := 1
     senao
-      vida := "morto"
+      r_vida := "morto"
     fim
-    dano
+    r_dano
   fim
 
   retorno_vida()
-    vida
+    r_vida
   fim
   atualize()
 

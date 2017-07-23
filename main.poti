@@ -1,15 +1,18 @@
 use "jerimum"
 
+###para ser carregado nas classes###
+y_base = 514.0 - 134.0
+#####
+
 use "movimentos.poti"
 use "robot.poti"
 use "zombie.poti"
 
-var y_base := 514.0 - 134.0
 var y_basezombie := 514.0 - 130.0
 var x_robot, y_robot, escala := 20.0, y_base, 0.25
 var x_zombie, y_zombie := 960.0 - 107 - 20, y_basezombie
-robot = Robot(x_robot, y_robot, y_base, escala)
-zombie = Zombie(x_zombie, y_zombie, y_basezombie, escala)
+robot = Robot(x_robot, y_robot, escala)
+zombie = Zombie(x_zombie, y_zombie, escala)
 
 ###
 background = Imagem("background.png").fatie(960, 550)
@@ -17,8 +20,8 @@ sobre = Imagem("backgroundsobre.png")
 telainicio = Imagem("startbackground.png").fatie(960, 550)
 var estado := "INICIO"
 lifebar = Imagem("lifebar.png").fatie(424, 104)
+lifezombie = Imagem("lifezombie.png").fatie(262, 38)
 ###
-var fonte := Fonte(16)
 
 desenhe()
   escolha estado
@@ -48,6 +51,7 @@ desenhe_inicio()
 fim
 
 desenhe_jogando()
+  lifezombie[robot.retorno_robot].desenhe(zombie.x + 25, zombie.y, 3, 0, escala, escala)
   lifebar[zombie.retorno_zombie].desenhe(0, 0, 3)
   img = background[(Relogio.agora div 120 mod background.tamanho + 1).inteiro]
   img.desenhe(0, 0, 0)
@@ -57,7 +61,9 @@ desenhe_jogando()
 fim
 
 atualize_jogando()
-  se zombie.x > robot.x e zombie.x < robot.x + 70 então
+  se robot.z_vida == "morto" entao
+    zombie.morrer
+  senaose zombie.x > robot.x e zombie.x < robot.x + 70 então
     zombie.ataque
   senaose zombie.x > robot.x entao
     zombie.andar
@@ -68,6 +74,7 @@ atualize_jogando()
   fim
   robot.atualize
   zombie.atualize
+  robot.z_x := zombie.x
 
   se zombie.retorno_vida == "morto" então
     robot.morrer

@@ -15,3 +15,6 @@ Para "fatiar" as partes do Zumbi, use como dimensões:
 
 Para lifebar:
   Largura: 424 pixels x Altura: 104 pixels
+
+Para lifezombie:
+Largura: 262 pixels x Altura: 38 pixels
