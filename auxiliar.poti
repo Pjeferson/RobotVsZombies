@@ -1,0 +1,10 @@
+var contador := 0.0
+var i := 0.0
+enquanto contador < 100000 faça
+
+  contador := contador +i/10000
+  i := i +1
+  
+
+fim
+escreva "Fudeuu"

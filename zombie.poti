@@ -6,8 +6,10 @@ tipo Zombie
   var r_pontos := 0
   var r_dano := 10
   var r_vida := "vivo"
+  var zombies := [exibirzombie,exibirzombie,exibirzombie,exibirzombie,exibirzombie,exibirzombie]
+  x_inicial = x
   ######### Functions/Comands #########
-
+  
   esperar()
     n = (Relogio.agora div 120 mod esperazombie.tamanho + 1).inteiro
     exibirzombie := esperazombie[n]
@@ -15,6 +17,7 @@ tipo Zombie
 
   desenhe()
     exibirzombie.desenhe(x, y, 1, 0, escala, escala)
+
   fim
 
   andar()
@@ -34,7 +37,7 @@ tipo Zombie
         r_pontos := r_pontos + 1
       fim
   fim
-
+  #zumbi damage in robot
   retorno_zombie()
     se r_pontos < 20 entao
       r_dano := 10
@@ -58,6 +61,10 @@ tipo Zombie
       r_dano := 1
     senao
       r_vida := "morto"
+    fim
+  #dano caso o zombie chegue no fim do cenário
+    se x < x_inicial -900.0  então
+      r_dano := 10
     fim
     r_dano
   fim
