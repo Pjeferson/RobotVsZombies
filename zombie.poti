@@ -17,7 +17,6 @@ tipo Zombie
 
   desenhe()
     exibirzombie.desenhe(x, y, 1, 0, escala, escala)
-
   fim
 
   andar()
@@ -64,7 +63,7 @@ tipo Zombie
     fim
   #dano caso o zombie chegue no fim do cenário
     se x < x_inicial -900.0  então
-      r_dano := 10
+      r_dano := r_dano-2
     fim
     r_dano
   fim
