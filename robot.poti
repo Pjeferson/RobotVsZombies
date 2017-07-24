@@ -8,7 +8,14 @@ tipo Robot
   var z_x := 960.0
   var z_pontos := 0
   var z_dano := 10
+
   var z_vida := "vivo"
+
+  var tempo1 := 0.0
+  var position := x+100
+  position_inicial = x + 100
+
+  var tempo_inicial := 0.0
   ######### Functions/Comands #########
 
   normalefeito()
@@ -23,7 +30,7 @@ tipo Robot
     normalefeito
   fim
 
-  ##### /salto/ em construcao ####
+  ##### SAlto funciona com um jatpack e pode ser usado junto com outras funções!####
 
   salto()
     se y > y_base - (556 * escala) entao
@@ -50,7 +57,7 @@ tipo Robot
       exibir := saltoatiraimg[n]
     fim
   fim
-
+  # mover para a direita x +
   correr()
     se x + 567 * escala < jogo.largura entao
       x := x + 4.0
@@ -63,7 +70,7 @@ tipo Robot
     fim
     normalefeito
   fim
-
+  # mover para a esquerda x -
   recuar()
     se x > 0 - 10 entao
       x := x - 3.0
@@ -112,7 +119,7 @@ tipo Robot
     n2 = (Relogio.agora div 60 mod efeito_ataqueimg.tamanho + 1).inteiro
     efeito := efeito_ataqueimg[n2]
   fim
-
+#Efeito tiro aqui
   tiro()
     n = (Relogio.agora div 120 mod tiroimg.tamanho + 1).inteiro
     exibirtiro := tiroimg[n]
@@ -125,6 +132,7 @@ tipo Robot
     normalefeito
   fim
 
+  #dano do robô ao zumbi!!
   retorno_robot()
     se z_pontos < 10 entao
       z_dano := 10
@@ -149,6 +157,9 @@ tipo Robot
     senao
       z_vida := "morto"
     fim
+    #se position >= zumbi.x então
+    #  z_dano := z_dano -2
+    #fim
     z_dano
   fim
 
@@ -156,11 +167,16 @@ tipo Robot
     z_vida
   fim
 
+
+
+
+
+
   desenhe()
     exibir.desenhe(x, y, 1, 0, escala, escala)
     se Teclado.TECLA_T então
       #tinha esquecido de atualizar a variavel x_tiro e y_tiro, por isso que troquei
-      exibirtiro.desenhe(x + 100, y + 40, 1, 5.0, escala, escala)
+      exibirtiro.desenhe(x + position, y + 40, 1, 5.0, escala, escala)
     fim
     se Teclado.TECLA_ESPACO então
       efeito.desenhe(x + 100, y - 20, 1, 0.0, 1,1)
@@ -186,6 +202,17 @@ tipo Robot
       morrer
     senão
       esperar
+    fim
+    #atualizando para mudar o position em função do tempo.
+    tempo1 := tempo1 +1.0/60.0
+    se tempo1 >= tempo_inicial + 0.04 então #quanto menor o tempo mais rápido o tiro vai atingir position_inicial+400
+      position := position +20
+      tempo_inicial := tempo1
+    fim
+
+    #tentei puxar aqui a posição do zumbi e não consegui
+    se position >= position_inicial+400 então
+      position := position_inicial
     fim
 
   fim
