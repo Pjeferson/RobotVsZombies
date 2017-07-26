@@ -9,7 +9,7 @@ tipo Zombie
   var zombies := [exibirzombie,exibirzombie,exibirzombie,exibirzombie,exibirzombie,exibirzombie]
   x_inicial = x
   ######### Functions/Comands #########
-  
+
   esperar()
     n = (Relogio.agora div 120 mod esperazombie.tamanho + 1).inteiro
     exibirzombie := esperazombie[n]

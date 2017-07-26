@@ -14,7 +14,6 @@ tipo Robot
   var tempo1 := 0.0
   var position := x+100
   position_inicial = x + 100
-
   var tempo_inicial := 0.0
   ######### Functions/Comands #########
 
@@ -41,6 +40,10 @@ tipo Robot
     se Teclado.TECLA_ESPACO então
       n = (Relogio.agora div 120 mod ataquesaltoimg.tamanho + 1).inteiro
       exibir := ataquesaltoimg[n]
+      se n == 4 e x + 90 > z_x e x + 5 < z_x entao
+        z_pontos := z_pontos + 1
+      fim
+      efeito_ataque
     fim
     se Teclado.TECLA_PARA_DIREITA então
       se x + 567 * escala < jogo.largura entao
@@ -55,6 +58,7 @@ tipo Robot
     se Teclado.TECLA_T então
       n = (Relogio.agora div 90 mod saltoatiraimg.tamanho + 1).inteiro
       exibir := saltoatiraimg[n]
+      tiro
     fim
   fim
   # mover para a direita x +
@@ -67,6 +71,7 @@ tipo Robot
     se Teclado.TECLA_T então
       n = (Relogio.agora div 90 mod correatiraimg.tamanho + 1).inteiro
       exibir := correatiraimg[n]
+      tiro
     fim
     normalefeito
   fim
@@ -80,6 +85,7 @@ tipo Robot
     se Teclado.TECLA_T então
       n = (Relogio.agora div 90 mod correatiraimg.tamanho + 1).inteiro
       exibir := correatiraimg[n]
+      tiro
     fim
     normalefeito
   fim
@@ -100,6 +106,7 @@ tipo Robot
       se n == 4 e x + 90 > z_x e x + 5 < z_x entao
         z_pontos := z_pontos + 1
       fim
+      efeito_ataque
   fim
 
 
@@ -119,10 +126,33 @@ tipo Robot
     n2 = (Relogio.agora div 60 mod efeito_ataqueimg.tamanho + 1).inteiro
     efeito := efeito_ataqueimg[n2]
   fim
+
 #Efeito tiro aqui
   tiro()
     n = (Relogio.agora div 120 mod tiroimg.tamanho + 1).inteiro
     exibirtiro := tiroimg[n]
+    #atualizando para mudar o position em função do tempo.
+    se x < z_x então
+      tempo1 := tempo1 + 1.0/60.0
+      se tempo1 >= tempo_inicial + 0.04 então #quanto menor o tempo mais rápido o tiro vai
+        position := position +20
+        tempo_inicial := tempo1
+      fim
+
+      se position >= z_x e position < z_x + 75 então
+        z_pontos := z_pontos + aleatorio(10)
+        position := x
+      fim
+    senãose x > z_x + 75 então
+      tempo1 := tempo1 + 1.0/60.0
+      se tempo1 >= tempo_inicial + 0.04 então #quanto menor o tempo mais rápido o tiro vai
+        position := position +20
+        tempo_inicial := tempo1
+      fim
+      se position >= 960 então
+        position := x
+      fim
+    fim
   fim
 
   atirar()
@@ -176,7 +206,7 @@ tipo Robot
     exibir.desenhe(x, y, 1, 0, escala, escala)
     se Teclado.TECLA_T então
       #tinha esquecido de atualizar a variavel x_tiro e y_tiro, por isso que troquei
-      exibirtiro.desenhe(x + position, y + 40, 1, 5.0, escala, escala)
+      exibirtiro.desenhe(x + position, y + 55, 1, 5.0, escala, escala)
     fim
     se Teclado.TECLA_ESPACO então
       efeito.desenhe(x + 100, y - 20, 1, 0.0, 1,1)
@@ -193,7 +223,6 @@ tipo Robot
       recuar
     senãose Teclado.TECLA_ESPACO então
       ataque_a
-      efeito_ataque
     senãose Teclado.TECLA_T então
       atirar
     senãose Teclado.TECLA_PARA_BAIXO então
@@ -203,17 +232,5 @@ tipo Robot
     senão
       esperar
     fim
-    #atualizando para mudar o position em função do tempo.
-    tempo1 := tempo1 +1.0/60.0
-    se tempo1 >= tempo_inicial + 0.04 então #quanto menor o tempo mais rápido o tiro vai atingir position_inicial+400
-      position := position +20
-      tempo_inicial := tempo1
-    fim
-
-    #tentei puxar aqui a posição do zumbi e não consegui
-    se position >= position_inicial+400 então
-      position := position_inicial
-    fim
-
   fim
 fim
