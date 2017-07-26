@@ -139,11 +139,11 @@ tipo Robot
         tempo_inicial := tempo1
       fim
 
-      se position >= z_x e position < z_x + 75 então
+      se position >= z_x e position < z_x + 20 então
         z_pontos := z_pontos + aleatorio(10)
         position := x
       fim
-    senãose x > z_x + 75 então
+    senãose x > z_x + 20 então
       tempo1 := tempo1 + 1.0/60.0
       se tempo1 >= tempo_inicial + 0.04 então #quanto menor o tempo mais rápido o tiro vai
         position := position +20
