@@ -113,6 +113,7 @@ tipo Robot
   morrer()
     n = (Relogio.agora div 90 mod morrerimg.tamanho + 1).inteiro
     exibir := morrerimg[n]
+    exibir := morrerimg[10]
     normalefeito
   fim
 

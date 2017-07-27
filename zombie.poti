@@ -28,6 +28,7 @@ tipo Zombie
   morrer()
     n = (Relogio.agora div 120 mod morrerzombie.tamanho + 1).inteiro
     exibirzombie := morrerzombie[n]
+    exibirzombie := morrerzombie[10]
   fim
   ataque()
       n = (Relogio.agora div 120 mod ataquezombie.tamanho + 1).inteiro
