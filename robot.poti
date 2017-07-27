@@ -228,8 +228,6 @@ tipo Robot
       atirar
     senãose Teclado.TECLA_PARA_BAIXO então
       rasteira
-    senãose Teclado.TECLA_Y então
-      morrer
     senão
       esperar
     fim
